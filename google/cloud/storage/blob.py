@@ -1611,7 +1611,8 @@ class Blob(_PropertyMixin):
         headers, object_metadata, content_type = info
 
         base_url = _MULTIPART_URL_TEMPLATE.format(
-            hostname=self.client._connection.API_BASE_URL, bucket_path=self.bucket.path
+            hostname=self._require_client(client)._connection.API_BASE_URL,
+            bucket_path=self.bucket.path
         )
         name_value_pairs = []
 
@@ -1780,7 +1781,8 @@ class Blob(_PropertyMixin):
             headers.update(extra_headers)
 
         base_url = _RESUMABLE_URL_TEMPLATE.format(
-            hostname=self.client._connection.API_BASE_URL, bucket_path=self.bucket.path
+            hostname=self._require_client(client)._connection.API_BASE_URL,
+            bucket_path=self.bucket.path
         )
         name_value_pairs = []
 
